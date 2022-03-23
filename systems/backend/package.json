@@ -3,11 +3,11 @@
   "dependencies": {
     "@aws-sdk/client-s3": "3.55.0",
     "@nestjs/apollo": "10.0.7",
-    "@nestjs/common": "8.0.0",
+    "@nestjs/common": "8.4.2",
     "@nestjs/config": "2.0.0",
-    "@nestjs/core": "8.0.0",
+    "@nestjs/core": "8.4.2",
     "@nestjs/graphql": "10.0.7",
-    "@nestjs/platform-express": "8.0.0",
+    "@nestjs/platform-express": "8.4.2",
     "@nestjs/swagger": "5.2.0",
     "@nestjs/terminus": "8.0.6",
     "@nestjs/typeorm": "8.0.3",
@@ -26,7 +26,7 @@
     "ramda": "0.28.0",
     "reflect-metadata": "0.1.13",
     "rimraf": "3.0.2",
-    "rxjs": "7.2.0",
+    "rxjs": "7.5.5",
     "serialize-error": "8.1.0",
     "swagger-ui-express": "4.3.0",
     "typeorm": "0.2.45",
@@ -66,7 +66,7 @@
     "supertest": "6.2.2",
     "ts-jest": "27.1.3",
     "ts-node": "10.7.0",
-    "tsconfig-paths": "3.14.0",
+    "tsconfig-paths": "3.14.1",
     "typescript": "4.6.2"
   },
   "engines": {
