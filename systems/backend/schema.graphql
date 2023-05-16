@@ -56,5 +56,5 @@ type PrepareUpload {
 
 type Query {
   game(id: ID!): Game!
-  gameList(limit: Int = 10, name: String, offset: Int = 0, platform: String, userId: ID): GameList!
+  gameList(limit: Int! = 10, name: String, offset: Int! = 0, platform: String, userId: ID): GameList!
 }
