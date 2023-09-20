@@ -22,7 +22,7 @@ export class GetGameListArgs {
 
   @Field(() => Int)
   @Min(0)
-  @Max(100)
+  @Max(65535)
   @IsOptional()
   limit = 10;
 }
