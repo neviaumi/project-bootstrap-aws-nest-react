@@ -1,6 +1,7 @@
 # Infrastructure as code
 
 Include Setup AWS with
+
 * RDS
 * CloudFront
 * S3
@@ -11,6 +12,7 @@ Include Setup AWS with
 ## Setup
 
 [Install pulumi CLI](https://www.pulumi.com/docs/get-started/install/)
+
 ```bash
 bash ./scripts/ci/setup.sh
 bash ./scripts/ci/deploy.sh
@@ -35,8 +37,8 @@ In case you missed, execute `pulumi stack output` to see it again.
 
 then you can verify the deployment by running the following steps:
 
-- Open `frontend/index.html` in a browser
-- Open `frontend/upload/demo.gif` in a browser
+* Open `frontend/index.html` in a browser
+* Open `frontend/upload/demo.gif` in a browser
 
 ## Manual steps after deployment
 

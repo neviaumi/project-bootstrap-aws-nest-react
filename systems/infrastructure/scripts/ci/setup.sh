@@ -1,7 +1,9 @@
 #!/bin/sh
 
 set -ex
-export AWS_ACCESS_KEY_ID=test
-export AWS_SECRET_ACCESS_KEY=test
 
+curl -fsSL https://get.pulumi.com | sh
 npm install
+npm run build
+STATE_STORE_BUCKET=$(node ./bin/setup-state-store.js infrastructure-as-code-state-store)
+pulumi login "s3://$STATE_STORE_BUCKET"
