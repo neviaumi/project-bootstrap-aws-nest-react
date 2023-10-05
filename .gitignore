@@ -17,7 +17,7 @@ lerna-debug.log*
 coverage/
 systems/api/coverage/
 systems/api/src/test/coverage/
-
+.env
 /.nyc_output
 
 # IDEs and editors
