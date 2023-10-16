@@ -5,10 +5,10 @@
     "@pulumi/awsx": "1.0.5",
     "@pulumi/pulumi": "3.84.0",
     "@pulumi/random": "4.14.0",
+    "dotenv": "16.3.1",
     "handlebars": "4.7.7",
     "lodash.kebabcase": "4.1.1",
-    "nanoid": "5.0.1",
-    "ts-node": "l0.9.1"
+    "nanoid": "5.0.1"
   },
   "devDependencies": {
     "@babel/cli": "7.21.5",

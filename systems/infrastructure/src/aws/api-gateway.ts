@@ -2,21 +2,27 @@ import * as aws from '@pulumi/aws';
 import * as pulumi from '@pulumi/pulumi';
 
 import { isRunningOnLocal } from '../utils/isRunningOnLocal.ts';
+import { getEnv } from '../utils/load-dot-env-file.ts';
 import { resourceName } from '../utils/resourceName.ts';
-import { valueNa } from '../utils/value-na.ts';
 
 export function createAPIGateWay({
-  frontendDomain,
   lambda,
+  webHost,
 }: {
-  frontendDomain: pulumi.Output<string>;
   lambda: {
     invokeArn: pulumi.Output<string>;
     name: pulumi.Output<string>;
   };
+  webHost: pulumi.Output<string>;
 }) {
   if (isRunningOnLocal()) {
-    return { apigw: { apiEndpoint: valueNa } };
+    return {
+      apigw: {
+        apiEndpoint: pulumi.Output.create(
+          `http://localhost:${getEnv('API_PORT')}`,
+        ),
+      },
+    };
   }
   new aws.lambda.Permission(
     resourceName`permission-for-connect-api-gateway-to-lambda`,
@@ -33,7 +39,7 @@ export function createAPIGateWay({
       allowCredentials: true,
       allowHeaders: ['Content-Type'],
       allowMethods: ['*'],
-      allowOrigins: [pulumi.interpolate`https://${frontendDomain}`],
+      allowOrigins: [webHost],
     },
     protocolType: 'HTTP',
     routeKey: '$default',

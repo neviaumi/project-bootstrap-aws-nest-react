@@ -11,8 +11,7 @@ jobs:
           cache-dependency-path: '**/package-lock.json'
           node-version-file: .nvmrc
       - run: bash ./scripts/setup.sh
-      - run: bash ./scripts/ci/setup.sh
-      - run: bash ./scripts/ci/test.sh
+      - run: bash ./scripts/test.sh
 name: Verify PR
 
 on: pull_request_target

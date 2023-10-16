@@ -5,7 +5,7 @@ import {
   ListBucketsCommand,
   S3Client,
 } from '@aws-sdk/client-s3';
-import { nanoid } from 'nanoid';
+import { customAlphabet } from 'nanoid';
 
 const [bucketPrefix] = process.argv.slice(2);
 const isDev = process.env['APP_ENV'] === 'development';
@@ -21,7 +21,9 @@ const isBucketExists = existingBucket !== undefined;
 if (isBucketExists) {
   console.log(existingBucket.Name);
 } else {
-  const bucketSuffix = nanoid(6).toLowerCase();
+  const bucketSuffix = customAlphabet('abcdefghijklmnopqrstuvwxyz0123456789-')(
+    6,
+  ).toLowerCase();
   const bucketName = `${bucketPrefix}-${bucketSuffix}`;
   await client.send(
     new CreateBucketCommand({

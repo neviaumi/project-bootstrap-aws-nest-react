@@ -25,13 +25,13 @@ export default function GameLibraryPage() {
   const GET_GAME_LIST = gql`
     query queryGameList(
       $userId: ID
-      $offset: Int!
+      $nextPageToken: String
       $limit: Int!
       $platform: String
     ) {
       gameList(
         userId: $userId
-        offset: $offset
+        nextPageToken: $nextPageToken
         limit: $limit
         platform: $platform
       ) {
@@ -46,8 +46,8 @@ export default function GameLibraryPage() {
         }
         pageInfo {
           hasNextPage
+          nextPageToken
         }
-        totalCount
       }
     }
   `;
@@ -56,14 +56,12 @@ export default function GameLibraryPage() {
     Data,
     {
       limit: number;
-      offset: number;
       platform?: string | null;
       userId: string;
     }
   >(GET_GAME_LIST, {
     variables: {
       limit: 65535,
-      offset: 0,
       platform: platformFilter,
       userId: '1ec57d7a-67be-42d0-8a97-07e743e6efbc',
     },
@@ -72,7 +70,6 @@ export default function GameLibraryPage() {
   async function setFilter(filters: { platform: string }) {
     setPlatformFilter(filters.platform === 'ALL' ? null : filters.platform);
     await refetch({
-      offset: 0,
       platform: filters.platform === 'ALL' ? null : filters.platform,
     });
   }
@@ -88,13 +85,14 @@ export default function GameLibraryPage() {
   return (
     <Content className={'tw-flex tw-flex-row tw-justify-evenly'}>
       <Main>
-        <h1>
-          Saved {data?.gameList.totalCount} games on {platform} platform
-        </h1>
+        <h1>Saved games on {platform} platform</h1>
         <List>
           {data?.gameList.edges.map(({ node }) => (
             <ListItem key={node.id}>
-              <Card className={'tw-flex tw-w-40 tw-justify-between '}>
+              <Card
+                className={'tw-flex tw-w-80 tw-justify-between'}
+                data-testid={`game-container`}
+              >
                 <div className={'tw-inline-flex tw-items-center tw-gap-2'}>
                   <Image className={'tw-w-10'} src={node.boxArtImageUrl} />
                   <div className={'tw-flex tw-flex-col tw-content-between'}>

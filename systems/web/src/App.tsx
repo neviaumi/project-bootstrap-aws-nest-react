@@ -7,7 +7,7 @@ import Layout from './Layout/Layout.tsx';
 const cache = new InMemoryCache();
 
 function ApolloClientProvider({ children }: PropsWithChildren<unknown>) {
-  const uri = `${import.meta.env['VITE_BACKEND_HOST']}/graphql`;
+  const uri = `${import.meta.env['WEB_BACKEND_HOST']}/graphql`;
   const client = new ApolloClient({
     cache,
     uri: uri,
