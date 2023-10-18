@@ -8,11 +8,15 @@ import { valueNa } from '../utils/value-na.ts';
 export function createLambda(
   imageUri: pulumi.Output<string>,
   {
-    frontendDomain,
-    s3Bucket,
+    assetBucketName,
+    assetHost,
+    dynamodbGameTableName,
+    webHost,
   }: {
-    frontendDomain: pulumi.Output<string>;
-    s3Bucket: aws.s3.BucketV2;
+    assetBucketName: pulumi.Output<string>;
+    assetHost: pulumi.Output<string>;
+    dynamodbGameTableName: pulumi.Output<string>;
+    webHost: pulumi.Output<string>;
   },
 ) {
   if (isRunningOnLocal()) {
@@ -38,12 +42,14 @@ export function createLambda(
   const lambdaFunction = new aws.lambda.Function(resourceName`lambda`, {
     environment: {
       variables: {
-        APP_ENV: 'production',
-        APP_MODE: 'lambda',
-        CLOUDFRONT_URL: pulumi.interpolate`https://${frontendDomain}`,
+        API_DB_GAME_TABLE_NAME: dynamodbGameTableName,
+        API_ENV: 'production',
+        API_MODE: 'lambda',
+        API_S3_ASSET_BUCKET: assetBucketName,
+        API_S3_ASSET_HOST: assetHost,
+        API_S3_ASSET_REGION: 'eu-west-2',
+        API_WEB_HOST: webHost,
         NODE_ENV: 'production',
-        S3_ASSET_BUCKET: s3Bucket.bucket,
-        S3_REGION: 'eu-west-2',
       },
     },
     imageConfig: {

@@ -2,4 +2,4 @@
 
 set -ex
 
-npx lerna version --no-push --conventional-commits
+npx lerna version --no-push

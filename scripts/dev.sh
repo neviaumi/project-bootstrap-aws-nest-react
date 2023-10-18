@@ -2,18 +2,13 @@
 
 set -ex
 
-
-# docker-compose up -d
+docker compose up -d
 npx lerna exec --stream \
 --scope 'infrastructure' \
--- "test ! -f  scripts/dev-setup.sh || bash \
-                                scripts/dev-setup.sh"
+-- "test ! -f  scripts/dev-deploy.sh || bash \
+                                scripts/dev-deploy.sh"
 
-#npx lerna exec --stream \
-#--scope 'backend' --scope 'web' \
-#-- "test ! -f  scripts/dev-setup.sh || bash \
-#                                scripts/dev-setup.sh"
-#npx lerna exec --stream \
-#--scope 'backend' --scope 'web' \
-#-- "test ! -f  scripts/dev-server.sh || bash \
-#                                scripts/dev-server.sh"
+npx lerna exec --stream \
+--scope 'api' --scope 'web' \
+-- "test ! -f  scripts/dev-server.sh || bash \
+                                scripts/dev-server.sh"

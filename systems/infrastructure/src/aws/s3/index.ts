@@ -13,7 +13,9 @@ const currentDir = path.parse(new URL(import.meta.url).pathname).dir;
 
 export function createS3WebHostingBucket() {
   // Create an AWS resource (S3 Bucket)
-  const bucket = new aws.s3.BucketV2(resourceName`web-hosting-bucket`, {});
+  const bucket = new aws.s3.BucketV2(resourceName`web-hosting-bucket`, {
+    forceDestroy: true,
+  });
   const websiteConfig = new aws.s3.BucketWebsiteConfigurationV2(
     resourceName`bucket-website-config`,
     {
@@ -66,7 +68,9 @@ export function createS3WebHostingBucket() {
 
 export function createS3AssetsBucket() {
   // Create an AWS resource (S3 Bucket)
-  const bucket = new aws.s3.BucketV2(resourceName`assets-bucket`, {});
+  const bucket = new aws.s3.BucketV2(resourceName`assets-bucket`, {
+    forceDestroy: true,
+  });
   new aws.s3.BucketCorsConfigurationV2(resourceName`bucket-cors-config`, {
     bucket: bucket.id,
     corsRules: [

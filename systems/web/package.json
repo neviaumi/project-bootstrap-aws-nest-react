@@ -36,9 +36,7 @@
   "scripts": {
     "build": "tsc && vite build",
     "dev": "vite",
-    "lint": "eslint src --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview",
-    "test-ct": "playwright test -c playwright-ct.config.ts"
+    "preview": "vite preview"
   },
   "type": "module",
   "version": "0.0.0"
