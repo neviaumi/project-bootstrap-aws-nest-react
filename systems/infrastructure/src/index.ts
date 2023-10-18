@@ -1,5 +1,6 @@
 import './utils/load-dot-env-file.ts';
 
+import { getRegion } from '@pulumi/aws';
 import * as pulumi from '@pulumi/pulumi';
 
 import { createAPIGateWay } from './aws/api-gateway.ts';
@@ -14,6 +15,7 @@ import {
 } from './aws/s3/index.ts';
 import { isRunningOnLocal } from './utils/isRunningOnLocal.ts';
 
+const region = await getRegion();
 const { mainTable, seedTable, testTable } = createDynamoDb();
 const { bucket: webBucket } = createS3WebHostingBucket();
 const { bucket: assetsBucket } = createS3AssetsBucket();
@@ -50,6 +52,7 @@ await uploadTestIndexFile(webBucket, apigw);
 export const DYNAMODB_GAME_TABLE_NAME = mainTable.name;
 export const DYNAMODB_TEST_GAME_TABLE_NAME = testTable.name;
 export const DYNAMODB_SEED_TABLE_NAME = seedTable.name;
+export const AWS_REGION = region.name;
 
 export const ASSETS_S3_REGION = assetsBucket.region;
 export const ASSETS_S3_BUCKET = assetsBucket.bucket;

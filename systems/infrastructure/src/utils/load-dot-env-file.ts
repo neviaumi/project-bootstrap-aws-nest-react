@@ -7,7 +7,6 @@ const projectRoot = join(rootDir, '../../../..');
 
 const parsedEnv = config({ path: join(projectRoot, '.env.tmp') });
 if (parsedEnv.error || !parsedEnv.parsed) {
-  console.log({ error: parsedEnv.error, parsedEnv, projectRoot });
   throw new Error('Failed to load .env file');
 }
 

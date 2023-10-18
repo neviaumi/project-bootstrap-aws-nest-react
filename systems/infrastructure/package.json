@@ -16,13 +16,13 @@
     "@babel/preset-typescript": "7.23.0",
     "@busybox/babel-preset-typescript": "2023.9.30-alpha.2347",
     "@busybox/eslint-config": "2023.9.30-alpha.2347",
+    "@busybox/prettier-config": "2023.9.30-alpha.2347",
     "@busybox/tsconfig": "2023.9.30-alpha.2347",
     "@pulumi/awsguard": "0.4.0",
     "@pulumi/policy": "1.7.0",
     "@types/lodash.kebabcase": "4.1.7",
     "@types/node": "20.1.1",
     "eslint": "8.49.0",
-    "eslint-plugin-unicorn": "48.0.1",
     "typescript": "5.2.2"
   },
   "engines": {

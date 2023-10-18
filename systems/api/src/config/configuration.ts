@@ -34,11 +34,11 @@ export function configuration(override?: {
         env: 'API_DB_GAME_TABLE_NAME',
         format: String,
       }),
-      // gameTable: {
-      //   default: null,
-      //   env: 'API_TEST_DB_GAME_TABLE_NAME',
-      //   format: String,
-      // },
+      region: {
+        default: null,
+        env: 'API_DB_REGION',
+        format: String,
+      },
       seedTable: {
         default: null,
         env: 'API_DB_SEED_TABLE_NAME',

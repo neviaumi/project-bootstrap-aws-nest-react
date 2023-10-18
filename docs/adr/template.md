@@ -63,5 +63,6 @@ Technical Story: [description | ticket/issue URL] <!-- optional -->
 
 ## Links <!-- optional -->
 
-- [Link type] [Link to ADR] <!-- example: Refined by [ADR-0005](0005-example.md) -->
+- [Link type] [Link to ADR]
+<!-- example: Refined by [ADR-0005](0005-example.md) -->
 - … <!-- numbers of links can vary -->

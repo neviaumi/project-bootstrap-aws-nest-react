@@ -7,7 +7,6 @@ import Handlebars from 'handlebars';
 
 import { isRunningOnLocal } from '../../utils/isRunningOnLocal.ts';
 import { resourceName } from '../../utils/resourceName.ts';
-import { valueNa } from '../../utils/value-na.ts';
 
 const currentDir = path.parse(new URL(import.meta.url).pathname).dir;
 

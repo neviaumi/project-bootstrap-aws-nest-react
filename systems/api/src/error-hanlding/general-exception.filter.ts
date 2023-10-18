@@ -6,8 +6,8 @@ import {
   Logger,
 } from '@nestjs/common';
 import { GqlArgumentsHost } from '@nestjs/graphql';
-import type { ApolloError } from 'apollo-server-errors';
 import type { Request, Response } from 'express';
+import { GraphQLError } from 'graphql';
 import { omit } from 'ramda';
 import { serializeError } from 'serialize-error';
 
@@ -52,24 +52,29 @@ export class GeneralExceptionFilter implements ExceptionFilter {
 
     const [error] = exception.response?.errors ?? [];
 
-    const isApolloError = exception.extensions;
+    const isGraphQLError = (
+      exception: Error & {
+        extensions?: any;
+        response?: ExceptionPayload;
+      },
+    ): exception is GraphQLError => {
+      return exception['extensions'] !== undefined;
+    };
 
-    const apolloError: ApolloError = (
-      isApolloError
-        ? exception
-        : new ApolloException({
-            code: error?.code ?? ErrorCode.UnhandledError,
-            errors: exception.response?.errors ?? [
-              {
-                detail: exception.message,
-                stack: shouldIncludeStacktraceInErrorResponse
-                  ? exception.stack
-                  : undefined,
-                title: exception.name,
-              },
-            ],
-          })
-    ) as ApolloError;
+    const apolloError: GraphQLError = isGraphQLError(exception)
+      ? exception
+      : new ApolloException({
+          code: error?.code ?? ErrorCode.UnhandledError,
+          errors: exception.response?.errors ?? [
+            {
+              detail: exception.message,
+              stack: shouldIncludeStacktraceInErrorResponse
+                ? exception.stack
+                : undefined,
+              title: exception.name,
+            },
+          ],
+        });
     const { req, res } = ctx.getContext<{ req: Request; res: Response }>();
     const end = new Date().getTime();
 
