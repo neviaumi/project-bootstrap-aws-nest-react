@@ -64,6 +64,9 @@ export class DatabaseConnection {
       shouldUseLocalStack
         ? assocPath(['endpoint'], 'http://localhost:4566')
         : noOp,
+      shouldUseLocalStack
+        ? assocPath(['region'], config.getOrThrow('database.region'))
+        : noOp,
     )({} as any);
     this.client = new DynamoDBClient(clientConfig);
   }

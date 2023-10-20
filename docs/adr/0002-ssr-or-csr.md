@@ -1,11 +1,12 @@
-# Frontend SSR or CSR ? 
+# Frontend SSR or CSR ?
 
 - Status: accepted
 - Date: 2022-03-22
 
 ## Context and Problem Statement
 
-I'm going to implement frontend page that show game gallery feature will include below
+I'm going to implement frontend page that
+show game gallery feature will include below
 
 - List all of my game library
 - Add new game to my library
@@ -14,9 +15,9 @@ I'm going to implement frontend page that show game gallery feature will include
 
 ## Decision Drivers
 
-- SEO 
+- SEO
 - Will content facing to anonymous user?
-- Deployment complexity 
+- Deployment complexity
 
 ## Considered Options
 
@@ -25,5 +26,5 @@ I'm going to implement frontend page that show game gallery feature will include
 
 ## Decision Outcome
 
-Client side rendering without cross-origin 
+Client side rendering without cross-origin
 because it would much easily setup and deploy

@@ -9,6 +9,9 @@ module.exports = {
     },
   ],
   root: true,
+  rules: {
+    'unicorn/consistent-function-scoping': 'off',
+  },
   settings: {
     tailwindcss: {
       config: './tailwind.config.mjs',

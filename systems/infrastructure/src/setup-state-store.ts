@@ -10,7 +10,13 @@ import { customAlphabet } from 'nanoid';
 const [bucketPrefix] = process.argv.slice(2);
 const isDev = process.env['APP_ENV'] === 'development';
 const client = new S3Client(
-  isDev ? { endpoint: 'http://localhost:4566', forcePathStyle: true } : {},
+  isDev
+    ? {
+        endpoint: 'http://localhost:4566',
+        forcePathStyle: true,
+        region: 'eu-west-2',
+      }
+    : {},
 );
 
 const data = await client.send(new ListBucketsCommand({}));

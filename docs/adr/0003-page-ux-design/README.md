@@ -5,10 +5,10 @@
 
 ## Context and Problem Statement
 
-I go to implement the feature on frontend and need some research 
+I go to implement the feature on frontend and need some research
 on how people in world doing.
 
-## Decision Drivers 
+## Decision Drivers
 
 - Implementation complexity
 - Make sense to user
@@ -19,8 +19,8 @@ on how people in world doing.
 
 ![PSN screen short](./psn.png)
 
-For XBox and Nintendo I don't have account to visit bought game list. 
-so let check the console game list here.    
+For XBox and Nintendo I don't have account to visit bought game list.
+so let check the console game list here.
 
 - [XBox](https://www.xbox.com/en-gb/xbox-game-pass/games?xr=shellnav)
 
@@ -33,4 +33,3 @@ so let check the console game list here.
 ## Decision Outcome
 
 Because PSN is much clean and easily to implement, let go on that
-
