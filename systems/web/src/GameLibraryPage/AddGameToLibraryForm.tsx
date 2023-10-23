@@ -30,7 +30,7 @@ type AddGameToLibraryFormValues = {
   publisher: string;
   releaseDate: string | null;
 };
-function GameBoxArtUploadField({
+export function GameBoxArtUploadField({
   control,
   disabled = false,
 }: PropsWithoutRef<{
@@ -83,7 +83,11 @@ function GameBoxArtUploadField({
       >
         {value && (
           <div className={'tw-flex tw-justify-center'}>
-            <Image className="tw-h-31.5 tw-w-31.5" src={value} />
+            <Image
+              className="tw-h-31.5 tw-w-31.5"
+              data-testid="uploaded-image"
+              src={value}
+            />
           </div>
         )}
         <FileUploadInput
@@ -150,7 +154,11 @@ function AddGameToLibraryModal({
     );
   };
   return (
-    <Modal onClose={onModalClose} open={open}>
+    <Modal
+      data-testid={'add-game-to-library-modal'}
+      onClose={onModalClose}
+      open={open}
+    >
       <ModalTitle>Add game to your library</ModalTitle>
       <ModalContent className={'tw-w-full'}>
         <form
@@ -230,6 +238,7 @@ function AddGameToLibraryModal({
                 >
                   <Label>Number of Players</Label>
                   <NumberInput
+                    data-testid={'game-number-of-players-input'}
                     slotProps={{
                       input: {
                         min: 0,
@@ -248,7 +257,7 @@ function AddGameToLibraryModal({
                 <Field {...field} className={'tw-flex tw-flex-col tw-gap-0.5'}>
                   <Label>Genre</Label>
                   <Select
-                    data-testid={'game-platform-input'}
+                    data-testid={'game-genre-input'}
                     name={field.name}
                     slotProps={{
                       listbox: {
@@ -260,31 +269,31 @@ function AddGameToLibraryModal({
                     value={field.value}
                   >
                     <SelectOption
-                      data-testid={'game-platform-input-ps4'}
+                      data-testid={'game-genre-input-fighting'}
                       value={'FIGHTING'}
                     >
                       Fighting
                     </SelectOption>
                     <SelectOption
-                      data-testid={'game-platform-input-ps5'}
+                      data-testid={'game-genre-input-fps'}
                       value={'FPS'}
                     >
                       FPS
                     </SelectOption>
                     <SelectOption
-                      data-testid={'game-platform-input-ps5'}
+                      data-testid={'game-genre-input-rpg'}
                       value={'RPG'}
                     >
                       RPG
                     </SelectOption>
                     <SelectOption
-                      data-testid={'game-platform-input-ps5'}
+                      data-testid={'game-genre-input-srpg'}
                       value={'SRPG'}
                     >
                       SRPG
                     </SelectOption>
                     <SelectOption
-                      data-testid={'game-platform-input-ps5'}
+                      data-testid={'game-genre-input-action'}
                       value={'ACTION'}
                     >
                       ACTION
@@ -302,16 +311,17 @@ function AddGameToLibraryModal({
               return (
                 <Field {...field} className={'tw-flex tw-flex-col tw-gap-0.5'}>
                   <Label>Release Date</Label>
-                  <DateInput data-testid={'form-stories-date-input'} />
+                  <DateInput data-testid={'game-release-date-input'} />
                 </Field>
               );
             }}
           />
           <footer className={'tw-mb-1 tw-mt-2 tw-flex tw-justify-end tw-gap-2'}>
-            <Button data-testid={'Submit-button'} type={'submit'}>
+            <Button data-testid={'game-submit'} type={'submit'}>
               Submit
             </Button>
             <Button
+              data-testid={'cancel-game-submit'}
               onClick={e => {
                 onModalClose?.(e, 'cancel');
               }}
@@ -345,7 +355,12 @@ function AddGameToLibraryModalTrigger({
   };
   return (
     <>
-      <Button onClick={() => setModalOpen(true)}>Add Game to Library</Button>
+      <Button
+        data-testid={'add-game-to-library'}
+        onClick={() => setModalOpen(true)}
+      >
+        Add Game to Library
+      </Button>
       {modalOpen && (
         <AddGameToLibraryModal onModalClose={onModalClose} open={modalOpen} />
       )}
