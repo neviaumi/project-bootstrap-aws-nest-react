@@ -3,7 +3,7 @@
 set -ex
 STACK=$1
 SCRIPT_LOCATION=$(dirname $(pwd)/${BASH_SOURCE[0]})
-WORK_SPACE_ROOT=$(realpath "$SCRIPT_LOCATION"/../../..)
+WORK_SPACE_ROOT=$(realpath "$SCRIPT_LOCATION"/../../../..)
 npm run build
 STATE_STORE_BUCKET=$(node ./bin/setup-state-store.js infrastructure-as-code-state-store)
 pulumi login "s3://$STATE_STORE_BUCKET"
