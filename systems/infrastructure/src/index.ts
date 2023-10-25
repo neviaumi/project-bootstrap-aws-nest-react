@@ -62,8 +62,8 @@ export const WEB_S3_BUCKET = webBucket.bucket;
 
 export const API_HOST = apigw.apiEndpoint;
 export const API_DOCKER_IMAGE = image.imageUri.apply(uri => uri.split(':')[0]);
-export const DOCKER_IMAGE_REPO = API_DOCKER_IMAGE.apply(
-  uri => uri.split('/')[0],
+export const DOCKER_IMAGE_REPO = API_DOCKER_IMAGE.apply(uri =>
+  uri === 'N/A' ? uri : uri.split('/')[0],
 );
 
 export const API_LAMBDA_FUNCTION_ARN = lambdaFunction.arn;

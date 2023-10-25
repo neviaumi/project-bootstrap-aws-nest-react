@@ -9,6 +9,7 @@ import { customAlphabet } from 'nanoid';
 
 const [bucketPrefix] = process.argv.slice(2);
 const isDev = process.env['APP_ENV'] === 'development';
+const region = process.env['AWS_DEFAULT_REGION'] || undefined;
 const client = new S3Client(
   isDev
     ? {
@@ -16,7 +17,7 @@ const client = new S3Client(
         forcePathStyle: true,
         region: 'eu-west-2',
       }
-    : {},
+    : { region },
 );
 
 const data = await client.send(new ListBucketsCommand({}));
