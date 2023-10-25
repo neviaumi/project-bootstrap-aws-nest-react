@@ -14,16 +14,17 @@ CURRENT_BRANCH=$(git branch --show-current)
 
 if [ "$CURRENT_BRANCH" == "main" ]; then
   echo "With major version"
-  VERSION=$(date +'%Y.%-m.%-d')
+  RELEASE_VERSION=$(date +'%Y.%-m.%-d')
 else
   echo "With alpha version"
-  VERSION=$(date +"%Y.%-m.%-d-alpha.$(($(date +"%-H") + 1))%M")
+  RELEASE_VERSION=$(date +"%Y.%-m.%-d-alpha.$(($(date +"%-H") + 1))%M")
 fi
 export RELEASE_BRANCH="release-$VERSION"
+export RELEASE_VERSION=$RELEASE_VERSION
 COMMIT_MESSAGE="release v$VERSION [skip ci]"
 git switch -c "$RELEASE_BRANCH"
 git push --set-upstream origin "$RELEASE_BRANCH"
-npx lerna version --message "$COMMIT_MESSAGE" --yes $VERSION
+npx lerna version --message "$COMMIT_MESSAGE" --yes $RELEASE_VERSION
 npx lerna exec --stream \
 --scope 'infrastructure' \
 -- "bash scripts/ci/deploy.sh $ENVIRONMENT"
