@@ -28,7 +28,7 @@ const isBucketExists = existingBucket !== undefined;
 if (isBucketExists) {
   console.log(existingBucket.Name);
 } else {
-  const bucketSuffix = customAlphabet('abcdefghijklmnopqrstuvwxyz0123456789-')(
+  const bucketSuffix = customAlphabet('abcdefghijklmnopqrstuvwxyz0123456789')(
     6,
   ).toLowerCase();
   const bucketName = `${bucketPrefix}-${bucketSuffix}`;
