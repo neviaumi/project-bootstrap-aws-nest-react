@@ -36,6 +36,7 @@ const { lambdaFunction, lambdaLatestVersionAlias } = createLambda(
   image.imageUri,
   {
     assetBucketName: assetsBucket.bucket,
+    assetBucketRegion: assetsBucket.region,
     assetHost: ASSETS_S3_BUCKET_HOST,
     dynamodbGameTableName: mainTable.name,
     webHost: WEB_HOST,
