@@ -15,7 +15,7 @@ jobs:
         with: 
           ref: ${{needs.release.outputs.release_branch}}
       - env: 
-          GITHUB_TOKEN: ${{secrets.REPO_SCOPED_TOKEN}}
+          GITHUB_TOKEN: ${{ github.token }}
           PR_BODY: ${{format('Bump version to v{0}', needs.release.outputs.released_version)}}
           PR_TITLE: ${{format('Merge back v{0} to', needs.release.outputs.released_version)}}
         name: Open PR to $GITHUB_REF_NAME
@@ -53,7 +53,7 @@ on:
   workflow_dispatch: 
     inputs: 
       environment: 
-        description: Environment name
+        description: Environment
         options: 
           - production
         required: true
