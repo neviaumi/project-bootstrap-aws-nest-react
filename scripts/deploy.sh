@@ -19,7 +19,7 @@ else
   echo "With alpha version"
   RELEASE_VERSION=$(date +"%Y.%-m.%-d-alpha.$(($(date +"%-H") + 1))%M")
 fi
-export RELEASE_BRANCH="release-$VERSION"
+export RELEASE_BRANCH="release-$RELEASE_VERSION"
 export RELEASE_VERSION=$RELEASE_VERSION
 COMMIT_MESSAGE="release v$VERSION [skip ci]"
 git switch -c "$RELEASE_BRANCH"
