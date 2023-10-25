@@ -9,11 +9,13 @@ export function createLambda(
   imageUri: pulumi.Output<string>,
   {
     assetBucketName,
+    assetBucketRegion,
     assetHost,
     dynamodbGameTableName,
     webHost,
   }: {
     assetBucketName: pulumi.Output<string>;
+    assetBucketRegion: pulumi.Output<string>;
     assetHost: pulumi.Output<string>;
     dynamodbGameTableName: pulumi.Output<string>;
     webHost: pulumi.Output<string>;
@@ -47,7 +49,7 @@ export function createLambda(
         API_MODE: 'lambda',
         API_S3_ASSET_BUCKET: assetBucketName,
         API_S3_ASSET_HOST: assetHost,
-        API_S3_ASSET_REGION: 'eu-west-2',
+        API_S3_ASSET_REGION: assetBucketRegion,
         API_WEB_HOST: webHost,
         NODE_ENV: 'production',
       },
