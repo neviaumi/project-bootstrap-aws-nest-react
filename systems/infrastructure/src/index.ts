@@ -39,6 +39,8 @@ const { lambdaFunction, lambdaLatestVersionAlias } = createLambda(
     assetBucketRegion: assetsBucket.region,
     assetHost: ASSETS_S3_BUCKET_HOST,
     dynamodbGameTableName: mainTable.name,
+    dynamodbRegion: region.name,
+    dynamodbSeedTableName: seedTable.name,
     webHost: WEB_HOST,
   },
 );
