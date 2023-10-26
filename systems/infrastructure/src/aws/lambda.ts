@@ -12,12 +12,16 @@ export function createLambda(
     assetBucketRegion,
     assetHost,
     dynamodbGameTableName,
+    dynamodbRegion,
+    dynamodbSeedTableName,
     webHost,
   }: {
     assetBucketName: pulumi.Output<string>;
     assetBucketRegion: pulumi.Output<string>;
     assetHost: pulumi.Output<string>;
     dynamodbGameTableName: pulumi.Output<string>;
+    dynamodbRegion: string;
+    dynamodbSeedTableName: pulumi.Output<string>;
     webHost: pulumi.Output<string>;
   },
 ) {
@@ -45,6 +49,8 @@ export function createLambda(
     environment: {
       variables: {
         API_DB_GAME_TABLE_NAME: dynamodbGameTableName,
+        API_DB_REGION: dynamodbRegion,
+        API_DB_SEED_TABLE_NAME: dynamodbSeedTableName,
         API_ENV: 'production',
         API_MODE: 'lambda',
         API_S3_ASSET_BUCKET: assetBucketName,
