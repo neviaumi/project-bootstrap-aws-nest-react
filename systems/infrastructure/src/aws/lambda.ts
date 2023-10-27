@@ -40,10 +40,13 @@ export function createLambda(
     policyArn: aws.iam.ManagedPolicy.AWSLambdaExecute,
     role: role,
   });
-  new aws.iam.RolePolicyAttachment(resourceName`role-policy-dynamodb`, {
-    policyArn: aws.iam.ManagedPolicy.AmazonDynamoDBReadOnlyAccess,
-    role: role,
-  });
+  new aws.iam.RolePolicyAttachment(
+    resourceName`role-policy-dynamodb-full-access`,
+    {
+      policyArn: aws.iam.ManagedPolicy.AmazonDynamoDBFullAccess,
+      role: role,
+    },
+  );
 
   const lambdaFunction = new aws.lambda.Function(resourceName`lambda`, {
     environment: {
