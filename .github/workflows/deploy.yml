@@ -12,15 +12,14 @@ jobs:
     runs-on: ubuntu-latest
     steps: 
       - uses: actions/checkout@v4
-        with: 
-          ref: ${{needs.release.outputs.release_branch}}
-      - env: 
+      - env:
           GITHUB_TOKEN: ${{secrets.REPO_SCOPED_TOKEN}}
+          HEAD_BRANCH: ${{needs.release.outputs.release_branch}}
           PR_BODY: ${{format('Bump version to v{0}', needs.release.outputs.released_version)}}
           PR_TITLE: ${{format('Merge back v{0} to', needs.release.outputs.released_version)}}
         name: Open PR to $GITHUB_REF_NAME
         run: |
-          PR_URL=$(gh pr create --title "$PR_TITLE $GITHUB_REF_NAME" --body "$PR_BODY" --base "$GITHUB_REF_NAME")
+          PR_URL=$(gh pr create --head "$HEAD_BRANCH" --title "$PR_TITLE $GITHUB_REF_NAME" --body "$PR_BODY" --base "$GITHUB_REF_NAME")
           gh pr merge --auto --rebase --delete-branch "$PR_URL"
   release: 
     outputs: 
