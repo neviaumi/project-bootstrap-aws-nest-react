@@ -30,7 +30,6 @@ export class GameService {
       await this.assetsStorageProvider.send(
         new PreSignUploadUrlCommand(
           {
-            ACL: 'public-read',
             Bucket: bucket,
             Key: key,
           },
