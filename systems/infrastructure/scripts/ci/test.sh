@@ -1,9 +1,13 @@
 #!/bin/sh
 
 set -ex
-export AWS_ACCESS_KEY_ID=test
-export AWS_SECRET_ACCESS_KEY=test
 
-npm run lint:ci
+npx eslint .
 npx tsc
-npm run test:ci
+npm run build
+STACK=preview
+set +e
+PULUMI_CONFIG_PASSPHRASE= pulumi stack init organization/project-bootstrap/$STACK
+set -e
+PULUMI_CONFIG_PASSPHRASE= pulumi stack select organization/project-bootstrap/$STACK
+PULUMI_CONFIG_PASSPHRASE= pulumi preview --policy-pack ./bin/aws-guard

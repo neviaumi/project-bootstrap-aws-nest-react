@@ -1,102 +1,88 @@
 import * as aws from '@pulumi/aws';
-import type * as awsx from '@pulumi/awsx';
 import * as pulumi from '@pulumi/pulumi';
-import kebabcase from 'lodash.kebabcase';
 
-export async function createLambda(
-  image: awsx.ecr.RepositoryImage,
+import { isRunningOnLocal } from '../utils/isRunningOnLocal.ts';
+import { resourceName } from '../utils/resourceName.ts';
+import { valueNa } from '../utils/value-na.ts';
+
+export function createLambda(
+  imageUri: pulumi.Output<string>,
   {
-    cloudFrontDistribution,
-    rds,
-    s3Bucket,
-    vpc,
+    assetBucketName,
+    assetBucketRegion,
+    assetHost,
+    dynamodbGameTableName,
+    dynamodbRegion,
+    dynamodbSeedTableName,
+    webHost,
   }: {
-    cloudFrontDistribution: aws.cloudfront.Distribution;
-    rds: aws.rds.Cluster;
-    s3Bucket: aws.s3.Bucket;
-    vpc: awsx.ec2.Vpc;
+    assetBucketName: pulumi.Output<string>;
+    assetBucketRegion: pulumi.Output<string>;
+    assetHost: pulumi.Output<string>;
+    dynamodbGameTableName: pulumi.Output<string>;
+    dynamodbRegion: string;
+    dynamodbSeedTableName: pulumi.Output<string>;
+    webHost: pulumi.Output<string>;
   },
 ) {
-  const namePrefix = kebabcase(pulumi.getStack());
-
-  const role = new aws.iam.Role(`${namePrefix}-lambda-vpc-role`, {
+  if (isRunningOnLocal()) {
+    return {
+      lambdaFunction: { arn: valueNa, invokeArn: valueNa, name: valueNa },
+      lambdaLatestVersionAlias: { name: valueNa },
+    };
+  }
+  const role = new aws.iam.Role(resourceName`role-lambda`, {
     assumeRolePolicy: aws.iam.assumeRolePolicyForPrincipal({
       Service: 'lambda.amazonaws.com',
     }),
   });
+  new aws.iam.RolePolicyAttachment(resourceName`role-policy-lambda`, {
+    policyArn: aws.iam.ManagedPolicy.AWSLambdaExecute,
+    role: role,
+  });
   new aws.iam.RolePolicyAttachment(
-    `${namePrefix}-lambda-vpc-role-policy-lambda-vpc-access`,
+    resourceName`role-policy-dynamodb-full-access`,
     {
-      policyArn: aws.iam.ManagedPolicy.AWSLambdaVPCAccessExecutionRole,
-      role: role,
-    },
-  );
-  new aws.iam.RolePolicyAttachment(
-    `${namePrefix}-lambda-vpc-role-policy-lambda-full-access`,
-    {
-      policyArn: aws.iam.ManagedPolicy.LambdaFullAccess,
-      role: role,
-    },
-  );
-  new aws.iam.RolePolicyAttachment(
-    `${namePrefix}-lambda-vpc-role-policy-lambda-rds-full-access`,
-    {
-      policyArn: aws.iam.ManagedPolicy.AmazonRDSFullAccess,
-      role: role,
-    },
-  );
-  new aws.iam.RolePolicyAttachment(
-    `${namePrefix}-lambda-vpc-role-policy-lambda-s3-full-access`,
-    {
-      policyArn: aws.iam.ManagedPolicy.AmazonS3FullAccess,
+      policyArn: aws.iam.ManagedPolicy.AmazonDynamoDBFullAccess,
       role: role,
     },
   );
 
-  const lambdaFunction = new aws.lambda.Function(`${namePrefix}-lambda`, {
+  const lambdaFunction = new aws.lambda.Function(resourceName`lambda`, {
     environment: {
       variables: {
-        APP_ENV: 'production',
-        APP_MODE: 'lambda',
-        CLOUDFRONT_URL: pulumi.interpolate`https://${cloudFrontDistribution.domainName}`,
-        // Insecurity, but this is a demo.
-        DATABASE_CONNECTION_URL: pulumi.interpolate`postgres://${
-          rds.masterUsername
-        }:${rds.masterPassword.apply(pw => encodeURIComponent(pw!))}@${
-          rds.endpoint
-        }:${rds.port}/${rds.databaseName}`,
+        API_DB_GAME_TABLE_NAME: dynamodbGameTableName,
+        API_DB_REGION: dynamodbRegion,
+        API_DB_SEED_TABLE_NAME: dynamodbSeedTableName,
+        API_ENV: 'production',
+        API_MODE: 'lambda',
+        API_S3_ASSET_BUCKET: assetBucketName,
+        API_S3_ASSET_HOST: assetHost,
+        API_S3_ASSET_REGION: assetBucketRegion,
+        API_WEB_HOST: webHost,
         NODE_ENV: 'production',
-        S3_ASSET_BUCKET: s3Bucket.bucket,
-        S3_REGION: 'eu-west-2',
       },
     },
     imageConfig: {
       commands: ['main-lambda.handler'],
     },
-    imageUri: image.imageValue,
+    imageUri,
     packageType: 'Image',
     publish: true,
     role: role.arn,
     timeout: 60,
-    vpcConfig: {
-      securityGroupIds: rds.vpcSecurityGroupIds,
-      subnetIds: vpc.privateSubnetIds,
-    },
   });
   const lambdaLatestVersionAlias = new aws.lambda.Alias(
-    `${namePrefix}-latest-alias`,
+    `lambda-version-alias`,
     {
       functionName: lambdaFunction.arn,
       functionVersion: '1',
     },
   );
-  new aws.lambda.ProvisionedConcurrencyConfig(
-    `${namePrefix}-lambda-provision-config`,
-    {
-      functionName: lambdaLatestVersionAlias.functionName,
-      provisionedConcurrentExecutions: 1,
-      qualifier: lambdaLatestVersionAlias.name,
-    },
-  );
+  new aws.lambda.ProvisionedConcurrencyConfig(`lambda-provision-config`, {
+    functionName: lambdaLatestVersionAlias.functionName,
+    provisionedConcurrentExecutions: 1,
+    qualifier: lambdaLatestVersionAlias.name,
+  });
   return { lambdaFunction, lambdaLatestVersionAlias };
 }

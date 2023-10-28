@@ -1,16 +1,9 @@
 /* eslint-disable import/no-unresolved */
 
-import pg from 'pg';
+import { DynamoDBClient, ListTablesCommand } from '@aws-sdk/client-dynamodb';
 
-const { Client } = pg;
-export function handler(event, _, callback) {
-  const client = new Client({
-    connectionString: process.env.DATABASE_CONNECTION_URL,
-  });
-  client.connect();
-  client.query('SELECT NOW()', (err, res) => {
-    client.end();
-    if (err) return callback(err);
-    return callback(null, { env: process.env, now: res.rows[0] });
-  });
+export async function handler() {
+  const client = new DynamoDBClient();
+  const resp = await client.send(new ListTablesCommand({}));
+  return { env: process.env, tables: resp.TableNames };
 }
