@@ -2,9 +2,12 @@
 
 set -ex
 ENVIRONMENT=$1
-# https://github.com/orgs/community/discussions/26560
-git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-git config user.name "github-actions[bot]"
+
+if [ -z "$CI" ]; then
+  # https://github.com/orgs/community/discussions/26560
+  git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+  git config user.name "github-actions[bot]"
+fi
 
 # Disable the commit hook
 export HUSKY=0
@@ -21,6 +24,7 @@ else
 fi
 export RELEASE_BRANCH="release-$RELEASE_VERSION"
 export RELEASE_VERSION=$RELEASE_VERSION
+export CURRENT_BRANCH=$CURRENT_BRANCH
 COMMIT_MESSAGE="release v$RELEASE_VERSION [skip ci]"
 git switch -c "$RELEASE_BRANCH"
 git push --set-upstream origin "$RELEASE_BRANCH"
