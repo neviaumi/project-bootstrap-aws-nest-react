@@ -1,9 +1,8 @@
 #! /usr/bin/env bash
 
-set -e
+set -ex
 
 CURRENT_BRANCH=$(git branch --show-current)
-NVM_SOURCE="$NVM_DIR/nvm.sh"
 echo "Current branch is $CURRENT_BRANCH"
 npx eslint .
 docker compose up -d
