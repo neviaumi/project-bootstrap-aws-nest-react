@@ -1,4 +1,4 @@
-import { serializeError } from 'serialize-error';
+import { serializeError } from '../../utils/serialize-error';
 
 export function err(error: Error) {
   return serializeError(error, {

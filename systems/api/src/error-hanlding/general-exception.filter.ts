@@ -9,13 +9,13 @@ import { GqlArgumentsHost } from '@nestjs/graphql';
 import type { Request, Response } from 'express';
 import { GraphQLError } from 'graphql';
 import { omit } from 'ramda';
-import { serializeError } from 'serialize-error';
 
 import { AppEnvironment } from '../config/config.constants';
 import { ConfigService } from '../config/config.module';
 import { err } from '../logging/formats/err';
 import { graphql } from '../logging/formats/graphql';
 import { http } from '../logging/formats/http';
+import { serializeError } from '../utils/serialize-error';
 import { ApolloException } from './apollo.exception';
 import { ErrorCode } from './error-code.constant';
 import type { ExceptionPayload } from './exception-payload';
@@ -27,7 +27,7 @@ export class GeneralExceptionFilter implements ExceptionFilter {
 
   constructor(private config: ConfigService) {}
 
-  catch(exception: Error, host: ArgumentsHost) {
+  async catch(exception: Error, host: ArgumentsHost) {
     const isGraphql = host.getType().toString() === 'graphql';
 
     if (isGraphql) return this.catchGraphqlError(exception, host);
@@ -39,7 +39,7 @@ export class GeneralExceptionFilter implements ExceptionFilter {
     return [AppEnvironment.DEV, AppEnvironment.TEST].includes(env);
   }
 
-  private catchGraphqlError(
+  private async catchGraphqlError(
     exception: Error & {
       extensions?: any;
       response?: ExceptionPayload;
@@ -82,7 +82,7 @@ export class GeneralExceptionFilter implements ExceptionFilter {
     this.logger.error(
       {
         duration: end - startAt,
-        err: err(apolloError),
+        err: await err(apolloError),
         graphql: graphql(ctx),
         http: http(req, Object.assign(res || {}, { body: {} })),
         message: 'Access Log',
@@ -92,7 +92,7 @@ export class GeneralExceptionFilter implements ExceptionFilter {
     return apolloError;
   }
 
-  private catchHttpError(exception: Error, context: ArgumentsHost) {
+  private async catchHttpError(exception: Error, context: ArgumentsHost) {
     const shouldIncludeStacktraceInErrorResponse =
       this.shouldIncludeStacktraceInErrorResponse();
     const ctx = context.switchToHttp();
@@ -115,7 +115,9 @@ export class GeneralExceptionFilter implements ExceptionFilter {
                 title: exception.name,
               },
             ],
-            meta: { exception: omit(['stack'])(serializeError(exception)) },
+            meta: {
+              exception: omit(['stack'])(await serializeError(exception)),
+            },
           });
     httpException.stack = exception.stack as string;
 
@@ -133,7 +135,7 @@ export class GeneralExceptionFilter implements ExceptionFilter {
     this.logger.error(
       {
         duration: end - startAt,
-        err: err(httpException),
+        err: await err(httpException),
         http: http(request, Object.assign(response, { body })),
         message: 'Access Log',
       },

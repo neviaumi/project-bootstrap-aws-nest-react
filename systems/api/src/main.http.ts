@@ -1,7 +1,7 @@
 import { ConfigService } from '@nestjs/config';
-import { serializeError } from 'serialize-error';
 
 import { bootstrap } from './bootstrap';
+import { serializeError } from './utils/serialize-error';
 
 async function start() {
   const app = await bootstrap();
@@ -10,8 +10,8 @@ async function start() {
   return app.listen(port);
 }
 
-start().catch(e => {
+start().catch(async e => {
   // eslint-disable-next-line no-console
-  console.error(serializeError(e));
+  console.error(await serializeError(e));
   throw e;
 });
