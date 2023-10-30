@@ -1,7 +1,7 @@
 {
   "author": "",
   "dependencies": {
-    "@apollo/server": "4.9.4",
+    "@apollo/server": "4.9.5",
     "@aws-sdk/client-dynamodb": "3.438.0",
     "@aws-sdk/client-s3": "3.438.0",
     "@aws-sdk/s3-request-presigner": "3.438.0",
