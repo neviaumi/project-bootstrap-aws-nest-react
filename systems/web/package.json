@@ -20,7 +20,7 @@
     "@vitejs/plugin-react": "4.0.0",
     "autoprefixer": "10.4.14",
     "cypress": "13.3.3",
-    "eslint": "8.51.0",
+    "eslint": "8.52.0",
     "eslint-plugin-unicorn": "48.0.1",
     "tailwindcss": "3.3.2",
     "typescript": "5.2.2",
