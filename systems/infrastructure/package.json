@@ -20,7 +20,7 @@
     "@busybox/tsconfig": "2023.9.30-alpha.2347",
     "@pulumi/awsguard": "0.4.0",
     "@pulumi/policy": "1.8.0",
-    "@types/lodash.kebabcase": "4.1.8",
+    "@types/lodash.kebabcase": "4.1.9",
     "@types/node": "20.1.1",
     "eslint": "8.53.0",
     "typescript": "5.2.2"
