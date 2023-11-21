@@ -10,7 +10,7 @@
     "@busybox/prettier-config": "2023.9.30-alpha.2347",
     "@commitlint/cli": "17.8.1",
     "commitlint": "18.4.3",
-    "eslint": "8.53.0",
+    "eslint": "8.54.0",
     "husky": "8.0.3",
     "is-ci": "3.0.1",
     "lint-staged": "15.1.0",
