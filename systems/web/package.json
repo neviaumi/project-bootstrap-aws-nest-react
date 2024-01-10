@@ -10,18 +10,16 @@
     "web-vitals": "3.5.1"
   },
   "devDependencies": {
-    "@busybox/cypress": "2023.9.30-alpha.2347",
-    "@busybox/eslint-config": "2023.9.30-alpha.2347",
-    "@busybox/prettier-config": "2023.9.30-alpha.2347",
-    "@busybox/tailwindcss-config": "2023.9.30-alpha.2347",
-    "@busybox/tsconfig": "2023.9.30-alpha.2347",
+    "@busybox/cypress": "2024.1.10-alpha.2158",
+    "@busybox/eslint-config": "2024.1.10-alpha.2158",
+    "@busybox/prettier-config": "2024.1.10-alpha.2158",
+    "@busybox/tsconfig": "2024.1.10-alpha.2158",
     "@types/react": "18.2.47",
     "@types/react-dom": "18.2.18",
     "@vitejs/plugin-react": "4.2.1",
     "autoprefixer": "10.4.16",
     "cypress": "13.6.2",
     "eslint": "8.56.0",
-    "eslint-plugin-unicorn": "50.0.1",
     "tailwindcss": "3.4.1",
     "typescript": "5.3.3",
     "vite": "5.0.11"

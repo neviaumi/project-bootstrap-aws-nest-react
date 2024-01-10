@@ -1,6 +1,14 @@
 updates:
   - directory: /
     groups:
+      busybox:
+        patterns:
+          - '@busybox/commitlint-config'
+          - '@busybox/eslint-config'
+          - '@busybox/prettier-config'
+          - '@busybox/tsconfig'
+          - '@busybox/cypress'
+          - '@busybox/babel-preset-typescript'
       aws-s3:
         patterns:
           - '@aws-sdk/client-s3'
