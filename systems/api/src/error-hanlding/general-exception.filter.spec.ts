@@ -13,10 +13,10 @@ import {
 import { randomUUID } from 'crypto';
 import gql from 'graphql-tag';
 
+import { createRequestAgent } from '../test-helpers/create-request-agent';
 import { expectResponseCode } from '../test-helpers/expect-response-code';
 import { getApolloServer } from '../test-helpers/get-apollo-server';
 import { getGraphqlErrorCodes } from '../test-helpers/get-graphql-error';
-import { getRequestAgent } from '../test-helpers/get-request-agent';
 import { withNestServerContext } from '../test-helpers/nest-app-context';
 import { ApolloException } from './apollo.exception';
 
@@ -80,7 +80,7 @@ describe('General exception filter', () => {
   describe('rest', () => {
     it('should response code ERR_UNHANDLED when endpoint response generic error', async () => {
       const app = appContext.app;
-      const { body } = await getRequestAgent(app.getHttpServer())
+      const { body } = await createRequestAgent(app.getHttpServer())
         .get('/test-case/unexpected-error')
         .expect(expectResponseCode({ expectedStatusCode: 500 }));
       expect(body).toStrictEqual({
@@ -102,7 +102,7 @@ describe('General exception filter', () => {
     });
     it('should forward response code when endpoint have specific error code', async () => {
       const app = appContext.app;
-      const { body } = await getRequestAgent(app.getHttpServer())
+      const { body } = await createRequestAgent(app.getHttpServer())
         .get('/test-case/418')
         .expect(expectResponseCode({ expectedStatusCode: 418 }));
       expect(body).toStrictEqual({
