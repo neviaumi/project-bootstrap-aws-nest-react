@@ -1,3 +1,5 @@
+import tailwindConfig from '@busybox/react-components/tailwind-config';
+
 /** @type {import('tailwindcss').Config} */
 const config = {
   content: [
@@ -5,7 +7,7 @@ const config = {
     './cypress/**/*.{ts,tsx}',
     './node_modules/@busybox/react-components/dist/*.js',
   ],
-  presets: [require('@busybox/react-components/tailwind-config')],
+  presets: [tailwindConfig],
 };
 
 export default config;

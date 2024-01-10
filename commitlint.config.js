@@ -1,3 +1,3 @@
-module.exports = {
-  extends: ['@busybox/commitlint-config'],
-};
+import commitlintConfig from '@busybox/commitlint-config';
+
+export default commitlintConfig;

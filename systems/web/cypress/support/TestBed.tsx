@@ -14,7 +14,7 @@ function TestBed(props: PropsWithChildren) {
   });
   return (
     <main>
-      <h1 className="tw-mb-1 tw-block tw-border-b-2 tw-border-warning tw-bg-warning tw-text-center tw-text-9xl tw-font-bold tw-text-warning hover:tw-border-warning-hover hover:tw-bg-warning-hover hover:tw-text-warning-hover">
+      <h1 className="tw-mb-1 tw-block tw-border-b-2 tw-border-warning tw-bg-warning tw-text-center tw-text-9xl tw-font-bold tw-text-warning hover:tw-border-warning-user-action hover:tw-bg-warning-user-action hover:tw-text-warning-user-action">
         TestBed
       </h1>
       <ApolloProvider client={client}>{props.children}</ApolloProvider>
