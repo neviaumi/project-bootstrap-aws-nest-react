@@ -2,14 +2,14 @@ import type { INestApplication } from '@nestjs/common';
 import type { DocumentNode, GraphQLError } from 'graphql';
 import { print } from 'graphql/language/printer';
 
+import { createRequestAgent } from './create-request-agent';
 import { expectResponseCode } from './expect-response-code';
-import { getRequestAgent } from './get-request-agent';
 
 // The reason why I don't use getApolloServer from @nestjs/apollo is because
 // https://github.com/apollographql/apollo-server/issues/2277
 // this function can make req, res available on apollo context
 export function getApolloServer(app: INestApplication) {
-  const requestAgent = getRequestAgent(app.getHttpServer());
+  const requestAgent = createRequestAgent(app.getHttpServer());
   return {
     async executeOperation<D = any>({
       http,
