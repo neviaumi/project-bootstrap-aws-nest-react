@@ -1,10 +1,10 @@
 import { gql, useMutation } from '@apollo/client';
 import { Button } from '@busybox/react-components/Button';
 import { DateInput } from '@busybox/react-components/DateInput';
-import { Field } from '@busybox/react-components/Field';
+import { Field } from '@busybox/react-components/FormField/Field';
 import { FileUploadInput } from '@busybox/react-components/FileUploadInput';
 import { Image } from '@busybox/react-components/Image';
-import { Label } from '@busybox/react-components/Label';
+import { Label } from '@busybox/react-components/FormField/Label';
 import {
   Modal,
   ModalContent,
@@ -162,7 +162,7 @@ function AddGameToLibraryModal({
       <ModalTitle>Add game to your library</ModalTitle>
       <ModalContent className={'tw-w-full'}>
         <form
-          className={'tw-flex tw-flex-col tw-justify-start'}
+          className={'tw-flex tw-flex-col tw-justify-start tw-w-full'}
           onSubmit={handleSubmit(submitFormValues)}
         >
           <GameBoxArtUploadField control={control} />

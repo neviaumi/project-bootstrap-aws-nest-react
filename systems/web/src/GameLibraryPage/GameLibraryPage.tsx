@@ -1,6 +1,7 @@
 import { gql, useQuery } from '@apollo/client';
 import { Card, CardTitle } from '@busybox/react-components/Card';
-import { Field } from '@busybox/react-components/Field';
+import { Field } from '@busybox/react-components/FormField/Field';
+import { Label } from '@busybox/react-components/FormField/Label';
 import { Image } from '@busybox/react-components/Image';
 import { Content, Main, Side } from '@busybox/react-components/Layout';
 import { List, ListItem } from '@busybox/react-components/List';
@@ -121,6 +122,7 @@ export default function GameLibraryPage() {
           }}
         />
         <Field
+          name={'platform'}
           onChange={e => {
             setFilter({
               platform: e.target.value,
@@ -128,8 +130,8 @@ export default function GameLibraryPage() {
           }}
           value={platform}
         >
-          <RadioGroup name={'platform'}>
-            <label className={'tw-block'}>Filter</label>
+          <RadioGroup>
+            <Label className={'tw-block'}>Filter</Label>
             <Radio id={'ps4'} value={'PS4'}>
               PS4
             </Radio>
