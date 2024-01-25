@@ -61,7 +61,9 @@ describe('GameBoxArtUploadField', () => {
       },
     );
     cy.wait('@assetUpload');
-    cy.findByTestId('uploaded-image').should('be.visible');
+    cy.findByRole('img', {
+      name: 'boxArtImageUrlValue',
+    }).should('be.visible');
   });
 });
 
@@ -73,10 +75,14 @@ describe('AddGameToLibraryForm', () => {
         onGameCreatedOnLibrary={onAddGameToLibrary}
       />,
     );
-    cy.findByTestId('add-game-to-library').click();
-    cy.findByTestId('add-game-to-library-modal').should('be.visible');
-    cy.findByTestId('cancel-game-submit').click();
-    cy.findByTestId('add-game-to-library-modal').should('be.not.exist');
+    cy.findByRole('button', { name: 'Add Game to Library' }).click();
+    cy.findByRole('article', {
+      name: 'Add game to your library',
+    }).should('be.visible');
+    cy.findByRole('button', { name: 'Cancel' }).click();
+    cy.findByRole('article', {
+      name: 'Add game to your library',
+    }).should('be.not.exist');
     cy.wrap(onAddGameToLibrary).should('not.have.been.called');
   });
   it('should trigger mutation when submit the form', () => {
@@ -126,7 +132,7 @@ describe('AddGameToLibraryForm', () => {
         onGameCreatedOnLibrary={onAddGameToLibrary}
       />,
     );
-    cy.findByTestId('add-game-to-library').click();
+    cy.findByRole('button', { name: 'Add Game to Library' }).click();
     cy.findByTestId('game-box-art-file-upload-raw-upload-input').selectFile(
       '@cat-ok',
       {
@@ -134,16 +140,36 @@ describe('AddGameToLibraryForm', () => {
       },
     );
     cy.wait('@assetUpload');
-    cy.findByTestId('uploaded-image').should('be.visible');
-    cy.findByTestId('game-name-input').type('Cat is Good');
-    cy.findByTestId('game-publisher-input').type('Cat Corp');
-    cy.findByTestId('game-platform-input').click();
-    cy.findByTestId('game-platform-input-ps4').click();
-    cy.findByTestId('game-number-of-players-input').type('1');
-    cy.findByTestId('game-genre-input').click();
-    cy.findByTestId('game-genre-input-rpg').click();
-    cy.findByTestId('game-release-date-input').type('2020-04-01');
-    cy.findByTestId('game-submit').click();
+    cy.findByRole('img', {
+      name: 'boxArtImageUrlValue',
+    }).should('be.visible');
+    cy.findByRole('textbox', {
+      name: 'Name',
+    }).type('Cat is Good');
+    cy.findByRole('textbox', {
+      name: 'Publisher',
+    }).type('Cat Corp');
+    cy.findByRole('combobox', {
+      name: 'Platform',
+    }).click();
+    cy.findByRole('option', {
+      name: 'PS4',
+    }).click();
+    cy.findByRole('spinbutton', {
+      name: 'Number of Players',
+    }).type('1');
+    cy.findByRole('combobox', {
+      name: 'Genre',
+    }).click();
+    cy.findByRole('option', {
+      name: 'RPG',
+    }).click();
+    cy.findByLabelText('Release Date').type('2020-04-01');
+    cy.findByRole('button', {
+      name: 'Submit',
+    }).click({
+      force: true,
+    });
     cy.wait('@gqlAddGameToLibraryMutation')
       .its('request.body.variables.data')
       .should('deep.eq', {
