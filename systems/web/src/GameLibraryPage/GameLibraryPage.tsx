@@ -122,7 +122,7 @@ export default function GameLibraryPage() {
           }}
         />
         <Field
-          name={'platform'}
+          name={'platform-filter'}
           onChange={e => {
             setFilter({
               platform: e.target.value,
