@@ -1,3 +1,5 @@
+import { randomUUID } from 'node:crypto';
+
 import { describe, expect, it } from '@jest/globals';
 import {
   Args,
@@ -10,7 +12,6 @@ import {
   Query,
   Resolver,
 } from '@nestjs/graphql';
-import { randomUUID } from 'crypto';
 import gql from 'graphql-tag';
 
 import { getApolloServer } from '../test-helpers/get-apollo-server';

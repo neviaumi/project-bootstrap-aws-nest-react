@@ -1,6 +1,7 @@
+import { randomUUID } from 'node:crypto';
+import path from 'node:path';
+
 import { Injectable } from '@nestjs/common';
-import { randomUUID } from 'crypto';
-import path from 'path';
 
 import {
   AssetsStorageProvider,

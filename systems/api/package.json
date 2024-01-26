@@ -32,9 +32,9 @@
   },
   "description": "",
   "devDependencies": {
-    "@busybox/eslint-config": "2024.1.10-alpha.2158",
-    "@busybox/prettier-config": "2024.1.10-alpha.2158",
-    "@busybox/tsconfig": "2024.1.10-alpha.2158",
+    "@busybox/eslint-config": "2024.1.25-alpha.2443",
+    "@busybox/prettier-config": "2024.1.25-alpha.2443",
+    "@busybox/tsconfig": "2024.1.25-alpha.2443",
     "@jest/globals": "29.7.0",
     "@nestjs/cli": "10.3.0",
     "@nestjs/schematics": "10.1.0",
@@ -59,7 +59,7 @@
     "typescript": "5.3.3"
   },
   "engines": {
-    "node": ">=14",
+    "node": ">=20",
     "yarn": "Use npm"
   },
   "jest": {

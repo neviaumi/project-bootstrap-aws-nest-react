@@ -5,9 +5,9 @@
   },
   "description": "",
   "devDependencies": {
-    "@busybox/commitlint-config": "2024.1.10-alpha.2158",
-    "@busybox/eslint-config": "2024.1.10-alpha.2158",
-    "@busybox/prettier-config": "2024.1.10-alpha.2158",
+    "@busybox/commitlint-config": "2024.1.25-alpha.2443",
+    "@busybox/eslint-config": "2024.1.25-alpha.2443",
+    "@busybox/prettier-config": "2024.1.25-alpha.2443",
     "@commitlint/cli": "17.8.1",
     "commitlint": "18.5.0",
     "eslint": "8.56.0",
@@ -19,7 +19,7 @@
     "typescript": "5.3.3"
   },
   "engines": {
-    "node": ">=14",
+    "node": ">=20",
     "yarn": "Use npm"
   },
   "license": "MIT",
