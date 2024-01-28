@@ -366,12 +366,15 @@ function AddGameToLibraryModal({
                           className: 'tw-w-60 tw-bg-white',
                           'data-testid': 'form-stories-select-options',
                         },
+                        popup: {
+                          className: 'tw-z-20',
+                        },
                         root: {
                           className: clsx(
                             'tw-h-5 tw-w-full tw-text-left',
                             shouldShowAsError
                               ? 'group-invalid:tw-border-error group-invalid:tw-text-error'
-                              : 'group-invalid:tw-border-warning group-invalid:tw-text-gray-500',
+                              : 'group-invalid:tw-border-warning group-invalid:tw-text-placeholder',
                           ),
                         },
                       }}
@@ -507,12 +510,15 @@ function AddGameToLibraryModal({
                           className: 'tw-w-60 tw-bg-white',
                           'data-testid': 'form-stories-select-options',
                         },
+                        popup: {
+                          className: 'tw-z-20',
+                        },
                         root: {
                           className: clsx(
                             'tw-h-5 tw-w-full tw-text-left',
                             shouldConsiderInvalidAsError
                               ? 'group-invalid:tw-border-error group-invalid:tw-text-error'
-                              : 'group-invalid:tw-border-warning group-invalid:tw-text-gray-500',
+                              : 'group-invalid:tw-border-warning group-invalid:tw-text-placeholder',
                           ),
                         },
                       }}
@@ -600,7 +606,7 @@ function AddGameToLibraryModal({
                           className: clsx(
                             shouldConsiderInvalidAsError
                               ? 'invalid:tw-border-error invalid:tw-text-error'
-                              : 'invalid:tw-border-warning invalid:tw-text-gray-500',
+                              : 'invalid:tw-border-warning invalid:tw-text-placeholder',
                           ),
                         },
                       }}

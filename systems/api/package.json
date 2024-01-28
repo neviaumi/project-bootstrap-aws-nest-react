@@ -32,9 +32,9 @@
   },
   "description": "",
   "devDependencies": {
-    "@busybox/eslint-config": "2024.1.25-alpha.2443",
-    "@busybox/prettier-config": "2024.1.25-alpha.2443",
-    "@busybox/tsconfig": "2024.1.25-alpha.2443",
+    "@busybox/eslint-config": "2024.1.27-alpha.131",
+    "@busybox/prettier-config": "2024.1.27-alpha.131",
+    "@busybox/tsconfig": "2024.1.27-alpha.131",
     "@jest/globals": "29.7.0",
     "@nestjs/cli": "10.3.0",
     "@nestjs/schematics": "10.1.0",

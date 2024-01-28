@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "@apollo/client": "3.8.10",
-    "@busybox/react-components": "2024.1.25-alpha.2132",
+    "@busybox/react-components": "2024.1.28-alpha.209",
     "clsx": "2.1.0",
     "graphql": "16.8.1",
     "react": "18.2.0",
@@ -9,10 +9,10 @@
     "react-hook-form": "7.49.3"
   },
   "devDependencies": {
-    "@busybox/cypress": "2024.1.25-alpha.2443",
-    "@busybox/eslint-config": "2024.1.25-alpha.2443",
-    "@busybox/prettier-config": "2024.1.25-alpha.2443",
-    "@busybox/tsconfig": "2024.1.25-alpha.2443",
+    "@busybox/cypress": "2024.1.27-alpha.131",
+    "@busybox/eslint-config": "2024.1.27-alpha.131",
+    "@busybox/prettier-config": "2024.1.27-alpha.131",
+    "@busybox/tsconfig": "2024.1.27-alpha.131",
     "@types/react": "18.2.48",
     "@types/react-dom": "18.2.18",
     "@vitejs/plugin-react": "4.2.1",
