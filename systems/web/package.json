@@ -1,19 +1,18 @@
 {
   "dependencies": {
     "@apollo/client": "3.8.10",
-    "@busybox/react-components": "2024.1.13-alpha.232",
+    "@busybox/react-components": "2024.1.28-alpha.209",
     "clsx": "2.1.0",
     "graphql": "16.8.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-hook-form": "7.49.3",
-    "react-router-dom": "6.21.3"
+    "react-hook-form": "7.49.3"
   },
   "devDependencies": {
-    "@busybox/cypress": "2024.1.10-alpha.2158",
-    "@busybox/eslint-config": "2024.1.10-alpha.2158",
-    "@busybox/prettier-config": "2024.1.10-alpha.2158",
-    "@busybox/tsconfig": "2024.1.10-alpha.2158",
+    "@busybox/cypress": "2024.1.27-alpha.131",
+    "@busybox/eslint-config": "2024.1.27-alpha.131",
+    "@busybox/prettier-config": "2024.1.27-alpha.131",
+    "@busybox/tsconfig": "2024.1.27-alpha.131",
     "@types/react": "18.2.48",
     "@types/react-dom": "18.2.18",
     "@vitejs/plugin-react": "4.2.1",
@@ -25,7 +24,7 @@
     "vite": "5.0.12"
   },
   "engines": {
-    "node": ">=16",
+    "node": ">=20",
     "yarn": "Use npm"
   },
   "license": "MIT",

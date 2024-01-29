@@ -1,15 +1,11 @@
 import { gql, useMutation } from '@apollo/client';
-import clsx from 'clsx';
 import { Button } from '@busybox/react-components/Button';
 import { DateInput } from '@busybox/react-components/DateInput';
-import { withCheckNewValueIsNotEqual } from '@busybox/react-components/utils/with-check-new-value-is-not-equal';
-
-import { Field } from '@busybox/react-components/FormField/Field';
 import { FileUploadInput } from '@busybox/react-components/FileUploadInput';
+import { Field } from '@busybox/react-components/FormField/Field';
 import { FieldErrorMessage } from '@busybox/react-components/FormField/FieldErrorMessage';
-import { Skeleton } from '@busybox/react-components/Skeleton';
-import { Image } from '@busybox/react-components/Image';
 import { Label } from '@busybox/react-components/FormField/Label';
+import { Image } from '@busybox/react-components/Image';
 import {
   Modal,
   ModalContent,
@@ -17,11 +13,14 @@ import {
 } from '@busybox/react-components/Modal';
 import { NumberInput } from '@busybox/react-components/NumberInput';
 import { Select, SelectOption } from '@busybox/react-components/Select';
+import { Skeleton } from '@busybox/react-components/Skeleton';
 import { TextInput } from '@busybox/react-components/TextInput';
+import { withCheckNewValueIsNotEqual } from '@busybox/react-components/utils/with-check-new-value-is-not-equal';
+import clsx from 'clsx';
 import {
   type ChangeEvent,
-  type PropsWithoutRef,
   type PropsWithChildren,
+  type PropsWithoutRef,
   type ReactElement,
   useState,
 } from 'react';
@@ -30,7 +29,6 @@ import {
   Controller,
   useController,
   useForm,
-  FormProvider,
 } from 'react-hook-form';
 
 type AddGameToLibraryFormValues = {
@@ -45,11 +43,11 @@ type AddGameToLibraryFormValues = {
 
 function FieldWithLoading({
   children,
-  skeleton,
   loading,
+  skeleton,
 }: PropsWithChildren<{
-  skeleton: ReactElement;
   loading: boolean;
+  skeleton: ReactElement;
 }>) {
   if (loading) return skeleton;
   return children;
@@ -81,7 +79,7 @@ export function GameBoxArtUploadField({
     },
   });
   const { disabled, name, onBlur, onChange, ref, value } = field;
-  const { invalid, isDirty, error } = fieldState;
+  const { error, invalid, isDirty } = fieldState;
   const { isSubmitted, isSubmitting } = formState;
   const shouldConsiderInvalidAsError = isSubmitted || isDirty;
 
@@ -102,25 +100,25 @@ export function GameBoxArtUploadField({
   };
   return (
     <Field
+      className={'tw-flex tw-flex-col tw-justify-center tw-gap-0.5'}
       disabled={disabled}
       error={invalid}
       name={name}
       onBlur={onBlur}
-      required
-      className={'tw-flex tw-flex-col tw-justify-center tw-gap-0.5'}
       onChange={uploadFileWhenInputChanged}
+      required
       value={value}
     >
       <FieldWithLoading
-        skeleton={<Skeleton className={'tw-h-5 tw-w-full'} />}
         loading={isSubmitting || prePareUploadGameBoxArtMutationLoading}
+        skeleton={<Skeleton className={'tw-h-5 tw-w-full'} />}
       >
         {value && (
           <div className={'tw-flex tw-justify-center'}>
             <Image
+              alt={`${name}Value`}
               className="tw-w-full"
               data-testid="uploaded-image"
-              alt={`${name}Value`}
               src={value}
             />
           </div>
@@ -165,15 +163,15 @@ function AddGameToLibraryModal({
 
   const {
     control,
-    handleSubmit,
     formState: { isSubmitting },
+    handleSubmit,
   } = useForm<AddGameToLibraryFormValues>({
     defaultValues: {
       name: '',
       publisher: '',
     },
-    shouldUseNativeValidation: true,
     mode: 'onChange',
+    shouldUseNativeValidation: true,
   });
   const submitFormValues = async (values: AddGameToLibraryFormValues) => {
     const data = {
@@ -208,32 +206,29 @@ function AddGameToLibraryModal({
       <ModalTitle>Add game to your library</ModalTitle>
       <ModalContent className={'tw-w-full'}>
         <form
+          className={'tw-flex tw-w-full tw-flex-col tw-justify-start'}
           noValidate
-          className={'tw-flex tw-flex-col tw-justify-start tw-w-full'}
           onSubmit={handleSubmit(submitFormValues)}
         >
           <GameBoxArtUploadField control={control} />
           <Controller
             control={control}
             name={'name'}
-            rules={{
-              required: 'name must be provided',
-            }}
             render={({ field, fieldState, formState }) => {
               const { disabled, name, onBlur, onChange, ref, value } = field;
-              const { invalid, isDirty, error } = fieldState;
+              const { error, invalid, isDirty } = fieldState;
               const { isSubmitted } = formState;
               const shouldConsiderInvalidAsError = isSubmitted || isDirty;
               return (
                 <Field
+                  className={'tw-flex tw-flex-col tw-gap-0.5'}
                   disabled={disabled}
                   error={invalid}
                   name={name}
                   onBlur={onBlur}
                   onChange={onChange}
-                  value={value}
                   required
-                  className={'tw-flex tw-flex-col tw-gap-0.5'}
+                  value={value}
                 >
                   <Label
                     className={clsx(
@@ -246,12 +241,12 @@ function AddGameToLibraryModal({
                     Name
                   </Label>
                   <FieldWithLoading
-                    skeleton={<Skeleton className={'tw-h-5 tw-w-full'} />}
                     loading={isSubmitting}
+                    skeleton={<Skeleton className={'tw-h-5 tw-w-full'} />}
                   >
                     <TextInput
-                      ref={ref}
                       data-testid={'game-name-input'}
+                      ref={ref}
                       slotProps={{
                         input: {
                           className: shouldConsiderInvalidAsError
@@ -268,28 +263,28 @@ function AddGameToLibraryModal({
                 </Field>
               );
             }}
+            rules={{
+              required: 'name must be provided',
+            }}
           />
           <Controller
             control={control}
             name={'publisher'}
-            rules={{
-              required: 'publisher must be provided',
-            }}
             render={({ field, fieldState, formState }) => {
               const { disabled, name, onBlur, onChange, ref, value } = field;
-              const { invalid, isDirty, error } = fieldState;
+              const { error, invalid, isDirty } = fieldState;
               const { isSubmitted } = formState;
               const shouldConsiderInvalidAsError = isSubmitted || isDirty;
               return (
                 <Field
+                  className={'tw-flex tw-flex-col tw-gap-0.5'}
                   disabled={disabled}
                   error={invalid}
                   name={name}
                   onBlur={onBlur}
                   onChange={onChange}
-                  value={value}
                   required
-                  className={'tw-flex tw-flex-col tw-gap-0.5'}
+                  value={value}
                 >
                   <Label
                     className={clsx(
@@ -302,12 +297,12 @@ function AddGameToLibraryModal({
                     Publisher
                   </Label>
                   <FieldWithLoading
-                    skeleton={<Skeleton className={'tw-h-5 tw-w-full'} />}
                     loading={isSubmitting}
+                    skeleton={<Skeleton className={'tw-h-5 tw-w-full'} />}
                   >
                     <TextInput
-                      ref={ref}
                       data-testid={'game-publisher-input'}
+                      ref={ref}
                       slotProps={{
                         input: {
                           className: shouldConsiderInvalidAsError
@@ -324,28 +319,28 @@ function AddGameToLibraryModal({
                 </Field>
               );
             }}
+            rules={{
+              required: 'publisher must be provided',
+            }}
           />
           <Controller
             control={control}
             name={'platform'}
-            rules={{
-              required: 'platform must be provided',
-            }}
             render={({ field, fieldState, formState }) => {
               const { disabled, name, onBlur, onChange, ref, value } = field;
-              const { invalid, isDirty, error } = fieldState;
+              const { error, invalid, isDirty } = fieldState;
               const { isSubmitted } = formState;
               const shouldShowAsError = isSubmitted || isDirty;
               return (
                 <Field
+                  className={'tw-flex tw-flex-col tw-gap-0.5'}
                   disabled={disabled}
                   error={invalid}
                   name={name}
                   onBlur={onBlur}
                   onChange={withCheckNewValueIsNotEqual(value)(onChange)}
-                  value={value}
                   required
-                  className={'tw-flex tw-flex-col tw-gap-0.5'}
+                  value={value}
                 >
                   <Label
                     className={clsx(
@@ -359,27 +354,30 @@ function AddGameToLibraryModal({
                   </Label>
 
                   <FieldWithLoading
-                    skeleton={<Skeleton className={'tw-h-5 tw-w-full'} />}
                     loading={isSubmitting}
+                    skeleton={<Skeleton className={'tw-h-5 tw-w-full'} />}
                   >
                     <Select
-                      placeholder={'Select platform'}
                       data-testid={'game-platform-input'}
+                      placeholder={'Select platform'}
+                      ref={ref}
                       slotProps={{
                         listbox: {
                           className: 'tw-w-60 tw-bg-white',
                           'data-testid': 'form-stories-select-options',
+                        },
+                        popup: {
+                          className: 'tw-z-20',
                         },
                         root: {
                           className: clsx(
                             'tw-h-5 tw-w-full tw-text-left',
                             shouldShowAsError
                               ? 'group-invalid:tw-border-error group-invalid:tw-text-error'
-                              : 'group-invalid:tw-border-warning group-invalid:tw-text-gray-500',
+                              : 'group-invalid:tw-border-warning group-invalid:tw-text-placeholder',
                           ),
                         },
                       }}
-                      ref={ref}
                     >
                       <SelectOption
                         data-testid={'game-platform-input-ps4'}
@@ -401,35 +399,29 @@ function AddGameToLibraryModal({
                 </Field>
               );
             }}
+            rules={{
+              required: 'platform must be provided',
+            }}
           />
           <Controller
             control={control}
             name={'numberOfPlayers'}
-            rules={{
-              required: 'number of player be provided',
-              validate: (value: string) => {
-                if (isNaN(parseInt(value, 10))) {
-                  return 'number of player must be a number';
-                }
-                return true;
-              },
-            }}
             render={({ field, fieldState, formState }) => {
               const { disabled, name, onBlur, onChange, ref, value } = field;
-              const { invalid, isDirty, error } = fieldState;
+              const { error, invalid, isDirty } = fieldState;
               const { isSubmitted } = formState;
               const shouldConsiderInvalidAsError = isSubmitted || isDirty;
 
               return (
                 <Field
+                  className={'tw-flex tw-flex-col tw-gap-0.5'}
                   disabled={disabled}
                   error={invalid}
                   name={name}
                   onBlur={onBlur}
-                  value={value}
-                  required
-                  className={'tw-flex tw-flex-col tw-gap-0.5'}
                   onChange={e => onChange(parseInt(e.target.value, 10))}
+                  required
+                  value={value}
                 >
                   <Label
                     className={clsx(
@@ -442,19 +434,19 @@ function AddGameToLibraryModal({
                     Number of Players
                   </Label>
                   <FieldWithLoading
-                    skeleton={<Skeleton className={'tw-h-5 tw-w-full'} />}
                     loading={isSubmitting}
+                    skeleton={<Skeleton className={'tw-h-5 tw-w-full'} />}
                   >
                     <NumberInput
                       data-testid={'game-number-of-players-input'}
-                      ref={ref}
                       placeholder={'Enter number of players'}
+                      ref={ref}
                       slotProps={{
                         input: {
-                          min: 1,
                           className: shouldConsiderInvalidAsError
                             ? 'invalid:tw-border-error'
                             : 'invalid:tw-border-warning',
+                          min: 1,
                         },
                       }}
                     />
@@ -465,29 +457,35 @@ function AddGameToLibraryModal({
                 </Field>
               );
             }}
+            rules={{
+              required: 'number of player be provided',
+              validate: (value: string) => {
+                if (isNaN(parseInt(value, 10))) {
+                  return 'number of player must be a number';
+                }
+                return true;
+              },
+            }}
           />
           <Controller
             control={control}
             name={'genre'}
-            rules={{
-              required: 'genre must be provided',
-            }}
             render={({ field, fieldState, formState }) => {
               const { disabled, name, onBlur, onChange, ref, value } = field;
-              const { invalid, isDirty, error } = fieldState;
+              const { error, invalid, isDirty } = fieldState;
               const { isSubmitted } = formState;
               const shouldConsiderInvalidAsError = isSubmitted || isDirty;
 
               return (
                 <Field
+                  className={'tw-flex tw-flex-col tw-gap-0.5'}
                   disabled={disabled}
+                  error={invalid}
                   name={name}
                   onBlur={onBlur}
                   onChange={withCheckNewValueIsNotEqual(value)(onChange)}
-                  value={value}
                   required
-                  error={invalid}
-                  className={'tw-flex tw-flex-col tw-gap-0.5'}
+                  value={value}
                 >
                   <Label
                     className={clsx(
@@ -500,24 +498,27 @@ function AddGameToLibraryModal({
                     Genre
                   </Label>
                   <FieldWithLoading
-                    skeleton={<Skeleton className={'tw-h-5 tw-w-full'} />}
                     loading={isSubmitting}
+                    skeleton={<Skeleton className={'tw-h-5 tw-w-full'} />}
                   >
                     <Select
-                      ref={ref}
                       data-testid={'game-genre-input'}
                       placeholder={'Select genre'}
+                      ref={ref}
                       slotProps={{
                         listbox: {
                           className: 'tw-w-60 tw-bg-white',
                           'data-testid': 'form-stories-select-options',
+                        },
+                        popup: {
+                          className: 'tw-z-20',
                         },
                         root: {
                           className: clsx(
                             'tw-h-5 tw-w-full tw-text-left',
                             shouldConsiderInvalidAsError
                               ? 'group-invalid:tw-border-error group-invalid:tw-text-error'
-                              : 'group-invalid:tw-border-warning group-invalid:tw-text-gray-500',
+                              : 'group-invalid:tw-border-warning group-invalid:tw-text-placeholder',
                           ),
                         },
                       }}
@@ -560,28 +561,28 @@ function AddGameToLibraryModal({
                 </Field>
               );
             }}
+            rules={{
+              required: 'genre must be provided',
+            }}
           />
           <Controller
             control={control}
             name={'releaseDate'}
-            rules={{
-              required: 'release date must be provided',
-            }}
             render={({ field, fieldState, formState }) => {
               const { disabled, name, onBlur, onChange, ref, value } = field;
-              const { invalid, isDirty, error } = fieldState;
+              const { error, invalid, isDirty } = fieldState;
               const { isSubmitted } = formState;
               const shouldConsiderInvalidAsError = isSubmitted || isDirty;
               return (
                 <Field
+                  className={'tw-flex tw-flex-col tw-gap-0.5'}
                   disabled={disabled}
                   error={invalid}
                   name={name}
                   onBlur={onBlur}
-                  value={value}
-                  required
                   onChange={onChange}
-                  className={'tw-flex tw-flex-col tw-gap-0.5'}
+                  required
+                  value={value}
                 >
                   <Label
                     className={clsx(
@@ -594,21 +595,21 @@ function AddGameToLibraryModal({
                     Release Date
                   </Label>
                   <FieldWithLoading
-                    skeleton={<Skeleton className={'tw-h-5 tw-w-full'} />}
                     loading={isSubmitting}
+                    skeleton={<Skeleton className={'tw-h-5 tw-w-full'} />}
                   >
                     <DateInput
                       data-testid={'game-release-date-input'}
+                      ref={ref}
                       slotProps={{
                         input: {
                           className: clsx(
                             shouldConsiderInvalidAsError
                               ? 'invalid:tw-border-error invalid:tw-text-error'
-                              : 'invalid:tw-border-warning invalid:tw-text-gray-500',
+                              : 'invalid:tw-border-warning invalid:tw-text-placeholder',
                           ),
                         },
                       }}
-                      ref={ref}
                     />
                   </FieldWithLoading>
                   <FieldErrorMessage className={'tw-text-error'}>
@@ -616,6 +617,9 @@ function AddGameToLibraryModal({
                   </FieldErrorMessage>
                 </Field>
               );
+            }}
+            rules={{
+              required: 'release date must be provided',
             }}
           />
           <footer className={'tw-mb-1 tw-mt-2 tw-flex tw-justify-end tw-gap-2'}>

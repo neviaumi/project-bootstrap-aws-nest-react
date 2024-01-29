@@ -1,5 +1,6 @@
+import { randomUUID } from 'node:crypto';
+
 import { describe, expect, it } from '@jest/globals';
-import { randomUUID } from 'crypto';
 import gql from 'graphql-tag';
 
 import { createRequestAgent } from '../test-helpers/create-request-agent';
@@ -234,15 +235,14 @@ describe('Game gallery Resolver', () => {
       expect(result.pageInfo.hasNextPage).toEqual(respNextPageToken !== null);
       if (respNextPageToken) {
         const currentEdges = result.edges;
-        const nextResp: typeof resp = await queryUntilNoNextPageToken(
-          respNextPageToken,
-        );
+        const nextResp: typeof resp =
+          await queryUntilNoNextPageToken(respNextPageToken);
         return {
           ...nextResp,
           data: {
             gameList: {
-              ...nextResp.data?.['gameList'],
-              edges: [...currentEdges, ...nextResp.data?.['gameList'].edges],
+              ...nextResp.data['gameList'],
+              edges: [...currentEdges, ...nextResp.data['gameList'].edges],
             },
           },
         };

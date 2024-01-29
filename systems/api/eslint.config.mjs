@@ -1,12 +1,10 @@
-import busyboxEslintConfig, {withConfigurationPrint, globals } from '@busybox/eslint-config';
+import busyboxEslintConfig, { globals } from '@busybox/eslint-config';
+import eslintPluginN from '@busybox/eslint-config/plugins/eslint-plugin-n';
 
-export default withConfigurationPrint()([
+export default [
+  ...busyboxEslintConfig,
   {
-    ignores: [
-      'package-lock.json',
-      'dist/',
-      'coverage/'
-    ],
+    ignores: ['package-lock.json', 'dist/', 'coverage/'],
   },
   {
     languageOptions: {
@@ -16,9 +14,20 @@ export default withConfigurationPrint()([
     },
   },
   {
+    plugins: {
+      n: eslintPluginN,
+    },
     rules: {
-      'no-new': 'off',
+      'import/extensions': 'off',
+      // typescript used that for overloading
+      'n/no-extraneous-import': [
+        'error',
+        {
+          allowModules: ['express'],
+        },
+      ],
+      // commonjs can't play well with that
+      'no-dupe-class-members': 'off',
     },
   },
-  ...busyboxEslintConfig
-]);
+];

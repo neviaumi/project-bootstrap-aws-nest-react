@@ -3,7 +3,7 @@
     "@aws-sdk/client-dynamodb": "3.423.0"
   },
   "engines": {
-    "node": ">=14",
+    "node": ">=20",
     "yarn": "Use npm"
   },
   "license": "MIT",

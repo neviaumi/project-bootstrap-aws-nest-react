@@ -14,10 +14,10 @@
     "@babel/cli": "7.23.9",
     "@babel/core": "7.23.9",
     "@babel/preset-typescript": "7.23.3",
-    "@busybox/babel-preset-typescript": "2024.1.10-alpha.2158",
-    "@busybox/eslint-config": "2024.1.10-alpha.2158",
-    "@busybox/prettier-config": "2024.1.10-alpha.2158",
-    "@busybox/tsconfig": "2024.1.10-alpha.2158",
+    "@busybox/babel-preset-typescript": "2024.1.27-alpha.131",
+    "@busybox/eslint-config": "2024.1.27-alpha.131",
+    "@busybox/prettier-config": "2024.1.27-alpha.131",
+    "@busybox/tsconfig": "2024.1.27-alpha.131",
     "@pulumi/awsguard": "0.4.0",
     "@pulumi/policy": "1.9.0",
     "@types/lodash.kebabcase": "4.1.9",
@@ -26,7 +26,7 @@
     "typescript": "5.3.3"
   },
   "engines": {
-    "node": ">=18",
+    "node": ">=20",
     "yarn": "Use npm"
   },
   "license": "MIT",
