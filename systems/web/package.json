@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "@apollo/client": "3.8.10",
-    "@busybox/react-components": "2024.1.28-alpha.209",
+    "@busybox/react-components": "2024.1.30-alpha.2323",
     "clsx": "2.1.0",
     "graphql": "16.8.1",
     "react": "18.2.0",
