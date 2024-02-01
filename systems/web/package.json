@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "@apollo/client": "3.9.0",
+    "@apollo/client": "3.9.1",
     "@busybox/react-components": "2024.1.30-alpha.2323",
     "clsx": "2.1.0",
     "graphql": "16.8.1",
