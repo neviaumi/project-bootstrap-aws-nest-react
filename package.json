@@ -27,7 +27,7 @@
   "private": true,
   "repository": "git@github.com/davidNHK/project-bootstrap",
   "scripts": {
-    "prepare": "is-ci || husky install",
+    "prepare": "is-ci || husky",
     "prettier": "prettier",
     "start:dev": "bash ./scripts/dev.sh"
   },

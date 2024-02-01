@@ -128,8 +128,27 @@ export class GameRepository {
 
     return {
       data: resp.Items!.map(this.transformDatabaseItem),
-      nextPageToken: resp.NextToken,
+      nextPageToken: (await this.hasNextPage({
+        ...executeStatementInput,
+        NextToken: resp.NextToken,
+      }))
+        ? resp.NextToken
+        : undefined,
     };
+  }
+
+  private async hasNextPage(executeStatementInput: ExecuteStatementInput) {
+    if (!executeStatementInput.NextToken) return false;
+    const resp = await this.databaseConnection.execute(
+      new ExecuteStatementCommand(executeStatementInput),
+    );
+    if (!resp.Items)
+      throw new InternalServerErrorException({
+        code: ErrorCode.UnexpectedError,
+        debugDetails: { ...executeStatementInput },
+        errors: [{ title: 'Unexpected error when fetch Database' }],
+      });
+    return resp.Items.length > 0;
   }
 
   async findOne(id: string) {
@@ -201,7 +220,6 @@ export class GameRepository {
 
   async save(game: SaveGameInput) {
     const transformedSaveGameInput = this.transformSaveGameInput(game);
-    this.logger.debug({ game, message: 'save game', transformedSaveGameInput });
     await this.databaseConnection.execute(
       new PutItemCommand({
         Item: transformedSaveGameInput,
