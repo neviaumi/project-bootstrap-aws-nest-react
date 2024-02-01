@@ -650,7 +650,9 @@ function isSubmitEvent(
 function AddGameToLibraryModalTrigger({
   onGameCreatedOnLibrary,
 }: {
-  onGameCreatedOnLibrary: (data: AddGameToLibraryFormValues) => Promise<void>;
+  onGameCreatedOnLibrary: (
+    data: AddGameToLibraryFormValues,
+  ) => Promise<void> | void;
 }) {
   const [modalOpen, setModalOpen] = useState(false);
   const onModalClose = (e: Event, reason: 'submit' | 'cancel' | string) => {

@@ -14,7 +14,8 @@ export class GameResolver {
 
   @Query(() => GameList)
   async gameList(@Args() where: GetGameListArgs): Promise<GameList> {
-    return this.gameService.fineGamesList(where);
+    const games = await this.gameService.fineGamesList(where);
+    return games;
   }
 
   @Query(() => Game)

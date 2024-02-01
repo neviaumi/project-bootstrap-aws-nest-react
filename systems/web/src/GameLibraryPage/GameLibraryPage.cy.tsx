@@ -45,6 +45,10 @@ describe('GameLibraryPage', () => {
                     },
                   },
                 ],
+                pageInfo: {
+                  hasNextPage: false,
+                  nextPageToken: null,
+                },
               },
             },
           },
