@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "@aws-sdk/client-s3": "3.509.0",
+    "@aws-sdk/client-s3": "3.511.0",
     "@pulumi/aws": "6.20.1",
     "@pulumi/awsx": "2.5.0",
     "@pulumi/pulumi": "3.105.0",
