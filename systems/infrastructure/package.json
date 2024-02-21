@@ -19,7 +19,7 @@
     "@busybox/prettier-config": "2024.1.27-alpha.131",
     "@busybox/tsconfig": "2024.1.27-alpha.131",
     "@pulumi/awsguard": "0.4.0",
-    "@pulumi/policy": "1.9.0",
+    "@pulumi/policy": "1.10.0",
     "@types/lodash.kebabcase": "4.1.9",
     "@types/node": "20.11.19",
     "eslint": "8.56.0",
