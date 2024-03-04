@@ -3,7 +3,7 @@
     "@aws-sdk/client-s3": "3.525.0",
     "@pulumi/aws": "6.24.1",
     "@pulumi/awsx": "2.5.0",
-    "@pulumi/pulumi": "3.107.0",
+    "@pulumi/pulumi": "3.108.1",
     "@pulumi/random": "4.16.0",
     "dotenv": "16.4.5",
     "handlebars": "4.7.8",
