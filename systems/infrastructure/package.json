@@ -21,7 +21,7 @@
     "@pulumi/awsguard": "0.4.0",
     "@pulumi/policy": "1.10.0",
     "@types/lodash.kebabcase": "4.1.9",
-    "@types/node": "20.11.25",
+    "@types/node": "20.11.26",
     "eslint": "8.57.0",
     "typescript": "5.4.2"
   },
