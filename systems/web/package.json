@@ -14,7 +14,7 @@
     "@busybox/prettier-config": "2024.1.27-alpha.131",
     "@busybox/tsconfig": "2024.1.27-alpha.131",
     "@types/react": "18.2.65",
-    "@types/react-dom": "18.2.21",
+    "@types/react-dom": "18.2.22",
     "@vitejs/plugin-react": "4.2.1",
     "autoprefixer": "10.4.18",
     "cypress": "13.6.6",
