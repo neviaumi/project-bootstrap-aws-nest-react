@@ -19,7 +19,7 @@
     "convict": "6.2.4",
     "dotenv": "16.4.5",
     "dotenv-expand": "11.0.6",
-    "graphql": "16.8.1",
+    "graphql": "16.8.2",
     "helmet": "7.1.0",
     "luxon": "3.4.4",
     "ramda": "0.30.1",
