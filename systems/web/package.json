@@ -3,7 +3,7 @@
     "@apollo/client": "3.10.5",
     "@busybox/react-components": "2024.1.30-alpha.2323",
     "clsx": "2.1.1",
-    "graphql": "16.8.1",
+    "graphql": "16.8.2",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "react-hook-form": "7.51.5"
