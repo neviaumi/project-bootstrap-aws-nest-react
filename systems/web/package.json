@@ -6,7 +6,7 @@
     "graphql": "16.9.0",
     "react": "18.3.1",
     "react-dom": "18.3.1",
-    "react-hook-form": "7.52.0"
+    "react-hook-form": "7.52.1"
   },
   "devDependencies": {
     "@busybox/cypress": "2024.1.27-alpha.131",
