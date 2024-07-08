@@ -24,7 +24,7 @@
     "luxon": "3.4.4",
     "ramda": "0.30.1",
     "reflect-metadata": "0.2.2",
-    "rimraf": "5.0.7",
+    "rimraf": "5.0.8",
     "rxjs": "7.8.1",
     "serialize-error": "8.1.0",
     "umzug": "3.8.1",
