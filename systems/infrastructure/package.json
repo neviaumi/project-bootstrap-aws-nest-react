@@ -11,7 +11,7 @@
     "nanoid": "5.0.7"
   },
   "devDependencies": {
-    "@babel/cli": "7.24.7",
+    "@babel/cli": "7.24.8",
     "@babel/core": "7.24.8",
     "@babel/preset-typescript": "7.24.7",
     "@busybox/babel-preset-typescript": "2024.1.27-alpha.131",
