@@ -2,7 +2,7 @@
   "dependencies": {
     "@aws-sdk/client-s3": "3.624.0",
     "@pulumi/aws": "6.48.0",
-    "@pulumi/awsx": "2.13.0",
+    "@pulumi/awsx": "2.14.0",
     "@pulumi/pulumi": "3.128.0",
     "@pulumi/random": "4.16.3",
     "dotenv": "16.4.5",
