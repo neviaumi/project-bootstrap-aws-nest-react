@@ -2,7 +2,7 @@
   "author": "",
   "dependencies": {
     "@apollo/server": "4.11.0",
-    "@aws-sdk/client-dynamodb": "3.654.0",
+    "@aws-sdk/client-dynamodb": "3.656.0",
     "@aws-sdk/client-s3": "3.654.0",
     "@aws-sdk/s3-request-presigner": "3.654.0",
     "@nestjs/apollo": "12.2.0",
