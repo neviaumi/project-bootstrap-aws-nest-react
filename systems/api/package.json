@@ -27,7 +27,7 @@
     "rimraf": "6.0.1",
     "rxjs": "7.8.1",
     "serialize-error": "8.1.0",
-    "umzug": "3.8.1",
+    "umzug": "3.8.2",
     "winston": "3.14.2"
   },
   "description": "",
