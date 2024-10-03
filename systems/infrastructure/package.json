@@ -13,7 +13,7 @@
   "devDependencies": {
     "@babel/cli": "7.25.6",
     "@babel/core": "7.25.2",
-    "@babel/preset-typescript": "7.24.7",
+    "@babel/preset-typescript": "7.25.7",
     "@busybox/babel-preset-typescript": "2024.1.27-alpha.131",
     "@busybox/eslint-config": "2024.1.27-alpha.131",
     "@busybox/prettier-config": "2024.1.27-alpha.131",
