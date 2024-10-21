@@ -15,7 +15,7 @@
     "@busybox/tsconfig": "2024.1.27-alpha.131",
     "@types/react": "18.3.11",
     "@types/react-dom": "18.3.1",
-    "@vitejs/plugin-react": "4.3.2",
+    "@vitejs/plugin-react": "4.3.3",
     "autoprefixer": "10.4.20",
     "cypress": "13.15.0",
     "eslint": "8.57.1",
