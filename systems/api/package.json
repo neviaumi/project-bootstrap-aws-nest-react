@@ -28,7 +28,7 @@
     "rxjs": "7.8.1",
     "serialize-error": "8.1.0",
     "umzug": "3.8.2",
-    "winston": "3.16.0"
+    "winston": "3.17.0"
   },
   "description": "",
   "devDependencies": {
